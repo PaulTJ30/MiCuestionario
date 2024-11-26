@@ -48,32 +48,23 @@ export const registerUsers = async (req: Request, res: Response):
 
 }
 
+
 export const singin = async (req: Request, res: Response): Promise<any> => {
-
-    // Correo y contraseña
-    // Veirificar que el usuario existe
-    // Si no existe devuelven error
     try {
-        const { email, password } = req.body
-        if (!email || password) {
-            return res.status(400).json({
-                msg: "Correo y contraseña necesarios"
-            })
-        }
-        const user = await UserModel.findOne({ correo: req.body.email, password: req.body.password })
-        if (!user) {
-            return res.status(404).json({
-                msg: "Usuario no existente"
-            })
-        }
-        const token = jwt.sign(JSON.stringify(user), "shhhh")
-        return res.status(200).json({
-            msg: `Este es tu token `, token
-        })
-    } catch (error) {
-        return res.status(500).json({
-            msg: "Hubo un erro al encontrar el usuario"
-        })
-    }
 
-}
+
+
+        //Buscar el usuario en base al correo y la contraseña
+        const user = await UserModel.findOne({ email: req.body.email, password: req.body.password })
+        if (!user) {
+            return res.status(404).json({ msg: "Usuario no encontrado" });
+        }
+        //Token
+        const token = jwt.sign(JSON.stringify(user), "shhhh")
+        //Si existe mandar el token
+        return res.status(200).json({ msg: `Inicio de sesión exitoso ${(user.name)}`, token });
+    } catch (error) {
+        //Si no existe el usuario mandar une rror
+        return res.status(500).json({ msg: "Hubo un error al encontrar al usuario" });
+    }
+};
