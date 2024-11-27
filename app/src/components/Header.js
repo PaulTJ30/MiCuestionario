@@ -2,13 +2,13 @@ import React from 'react'
 import { Nav, Navbar } from 'react-bootstrap'
 
 export const Header = () => {
-    const user = JSON.parse(localStorage.user);
+    const user = localStorage.user ? JSON.parse(localStorage.user) : undefined
 
     const logout = () => {
         localStorage.clear()
         window.location.href = "/"
     }
-    
+
     return (
         <Navbar bg="dark" data-bs-theme="dark" className='justify-content-center mb-3 bg-body-tertiary'>
             <Nav>

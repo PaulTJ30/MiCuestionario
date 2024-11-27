@@ -9,6 +9,7 @@ export const registerUsers = async (req: Request, res: Response):
         //Primero validar que los datos que necesitamos existen
         const name = req.body.name
         const lastNames = req.body.lastNames
+
         const email = req.body.email
         const password = req.body.password
         const rol = req.body.rol
@@ -31,6 +32,7 @@ export const registerUsers = async (req: Request, res: Response):
         const user = await UserModel.create({
             name,
             lastNames,
+
             email,
             password,
             rol
@@ -62,7 +64,7 @@ export const singin = async (req: Request, res: Response): Promise<any> => {
         //Token
         const token = jwt.sign(JSON.stringify(user), "shhhh")
         //Si existe mandar el token
-        return res.status(200).json({ msg: `Inicio de sesión exitoso ${(user.name)}`, token });
+        return res.status(200).json({ msg: `Inicio de sesión exitoso ${(user.name)}`, token, user });
     } catch (error) {
         //Si no existe el usuario mandar une rror
         return res.status(500).json({ msg: "Hubo un error al encontrar al usuario" });
