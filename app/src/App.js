@@ -1,20 +1,32 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 
 const App = () => {
   const [data, setData] = useState({});
+  const navigate = useNavigate();
 
   const onChange = (e) => {
     e.preventDefault();
     const loginData = data;
     loginData[e.target.name] = e.target.value;
     setData(loginData)
+    console.log(loginData)
   }
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     //Peticion a la DB
-    console.log(data)
+    try {
+      data.rol = "client"
+      await axios.post("http://localhost:4000/users/singin", data)
+      alert("Correcto")
+      navigate("/")
+    } catch (error) {
+      alert("Incorrecto ")
+    }
+
   }
 
   return (
