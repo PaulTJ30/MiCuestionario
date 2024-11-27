@@ -24,7 +24,7 @@ const App = () => {
       alert("Correcto")
       navigate("/")
     } catch (error) {
-      alert("Incorrecto ")
+      alert("Incorrecto")
     }
 
   }
