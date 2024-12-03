@@ -25,14 +25,13 @@ export const registerUsers = async (req: Request, res: Response):
         // Validar que el usuario sea administrador si el usuario a crear es administrador
         if (rol === "administrator" && req.user?.rol != "administrator") {
             return res.status(400).json({
-                msg: "No puedes crear un nuevo adminstrador si no eres unos"
+                msg: "No puedes crear un nuevo adminstrador si no eres uno"
             })
         }
 
         const user = await UserModel.create({
             name,
             lastNames,
-
             email,
             password,
             rol

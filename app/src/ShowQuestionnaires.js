@@ -9,7 +9,7 @@ export const ShowQuestionnaires = () => {
         <Container>
             <Card>
                 <Card.Body>
-                    <h3>Bienvenido de nuevo pinche perro, {user.name}</h3>
+                    <h3>Bienvenido de nuevo perro, {user.name}</h3>
                     <Card.Title>{user.rol == "administrator" ? "Cuestionarios creados" : "Tus cuestionarios"}</Card.Title>
                     <Card.Text><b>Formularios recientes:</b></Card.Text>
                     {
