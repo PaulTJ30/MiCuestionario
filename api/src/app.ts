@@ -1,32 +1,26 @@
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
-import { registerUsers, singin } from "./controllers/UsersController";
-import { createQuestionnaire } from "./controllers/QuestionnairesController";
-import { addQuestion } from "./controllers/QuestionController";
-import { addOption } from "./controllers/OptionController";
-const app: Application = express()
+import { registerUsers, singIn } from "./controllers/UsersController";
+import { createQuizz, getMetrics, getQuestionnaires } from "./controllers/QuestionnairesController";
 
-app.use(cors())
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+const app: Application = express();
+
+app.use(cors());
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (_req: Request, res: Response) => {
-    res.send("Hola desde mi servidor con TS")
+    res.send("Hola desde mi servidor con TS");
 })
-//Users
+
+//Usuarios
 app.post("/users/create", registerUsers)
-app.post("/users/singin", singin)
+app.post("/users/sign-in", singIn)
 
-//Cuestionarios
-app.post("/questionnaire/create", createQuestionnaire)
+app.post("/questionnaire/create", createQuizz)
+app.get("/questionnaire/get-metrics", getMetrics)
+app.get("/questionnaires/get-all", getQuestionnaires)
 
-// Opciones
-app.post('/option/add', addOption)
-
-
-// Preguntas
-app.post('/question/add', addQuestion)
-
-export default app
-
+export default app;

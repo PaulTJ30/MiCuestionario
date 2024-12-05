@@ -7,9 +7,9 @@ export interface IAnswer {
 }
 
 export interface IQuestionnaire {
-    UsersID: Schema.Types.ObjectId | string
+    userID: Schema.Types.ObjectId | string
     title: string,
-    descrption: string,
+    description: string,
 }
 
 export interface IOption {

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { UserModel } from "../modules/UsersModel";
+import { UserModel } from "../models/UsersModel";
 import jwt from "jsonwebtoken"
 
 export const registerUsers = async (req: Request, res: Response):
@@ -50,7 +50,7 @@ export const registerUsers = async (req: Request, res: Response):
 }
 
 
-export const singin = async (req: Request, res: Response): Promise<any> => {
+export const singIn = async (req: Request, res: Response): Promise<any> => {
     try {
 
 
